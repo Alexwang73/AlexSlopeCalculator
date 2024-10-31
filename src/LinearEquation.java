@@ -18,7 +18,7 @@ public class LinearEquation {
     public double distance() {
         double base = Math.pow((x2-x1), 2);
         double height = Math.pow((y2 - y1), 2);
-        double distance = Math.sqrt(base - height);
+        double distance = Math.sqrt(base + height);
         return roundedToHundredth(distance);
     }
 
@@ -52,10 +52,10 @@ public class LinearEquation {
 
 
     public String lineInfo() {
-        return "The two points are: (" + x1 + ", " + y1 + ") and (" + x2 + ", " + y2 + ") \n " +
-                "The equation of the line between these two points is: " + equation() + "\n " +
+        return "The two points are: (" + x1 + ", " + y1 + ") and (" + x2 + ", " + y2 + ") \n" +
+                "The equation of the line between these two points is: " + equation() + "\n" +
                 "The y-intercept of this line is: " + yIntercept() +"\n" +
-                "The slope of this line is: " + slope() +"\n " +
+                "The slope of this line is: " + slope() +"\n" +
                 "The distance between these points is: " + distance();
     }
 
