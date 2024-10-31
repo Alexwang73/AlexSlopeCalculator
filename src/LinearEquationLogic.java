@@ -62,7 +62,7 @@ public class LinearEquationLogic {
 
     private void coordinateWithX () {
         System.out.print("Enter an x coordinate: ");
-        double xCoordinate = scan.nextInt();
+        double xCoordinate = scan.nextDouble();
         scan.nextLine();
         String s = line.coordinateForX(xCoordinate);
         System.out.println(s);

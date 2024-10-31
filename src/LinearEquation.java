@@ -40,18 +40,29 @@ public class LinearEquation {
         if (y1 == y2) {
             return "y = " + yIntercept();
         }
+        if ((y2-y1) % (x2-x1) == 0) {
+            if (yIntercept() < 0) {
+                return "y = " + (y2 - y1) / (x2 - x1) + "x " + yIntercept();
+            }
+            return "y = " + (y2 - y1) / (x2 - x1) + "x + " + yIntercept();
+        }
+        if (yIntercept() < 0) {
+            return "y = " + (y2 - y1) / (x2 - x1) + "x " + yIntercept();
+        }
         return "y = " + (y2 - y1) + "/" + (x2 - x1) + "x + " + yIntercept();
     }
 
 
     public String coordinateForX(double x) {
-        return "(" + x + ", " + (x * slope() + yIntercept()) + ")";
+        double newX = x * slope() + yIntercept();
+        return "(" + x + ", " + newX + ")";
 
 
     }
 
 
     public String lineInfo() {
+
         return "The two points are: (" + x1 + ", " + y1 + ") and (" + x2 + ", " + y2 + ") \n" +
                 "The equation of the line between these two points is: " + equation() + "\n" +
                 "The y-intercept of this line is: " + yIntercept() +"\n" +
