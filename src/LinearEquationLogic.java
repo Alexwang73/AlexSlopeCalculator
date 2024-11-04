@@ -28,7 +28,7 @@ public class LinearEquationLogic {
 
 
     private void getCoordinateInfo() {
-        System.out.print("Welcome to the linear equation program.");
+        System.out.println("\nWelcome to the Linear Equation Calculator!.");
         System.out.print("Please enter a coordinate point in the form (x, y): ");
         coordinate = scan.nextLine();
         System.out.print("Please enter a coordinate point in the form (x, y): ");
@@ -61,32 +61,36 @@ public class LinearEquationLogic {
 
 
     private void coordinateWithX () {
-        System.out.print("Enter an x coordinate: ");
+        System.out.print("\nEnter an x coordinate: ");
         double xCoordinate = scan.nextDouble();
         scan.nextLine();
         String s = line.coordinateForX(xCoordinate);
-        System.out.println(s);
+        System.out.println("\nThe point on the line is " + s);
     }
 
 
-    private void gameLoop () {
+    private void gameLoop() {
         getCoordinateInfo();
         parseCoordinate();
-        if (x1Int != x2Int) {
-            printLineInfo();
-            coordinateWithX();
-            System.out.print("Do you want to continue doing this process (yes/no): ");
-            String condition = scan.nextLine();
-            while (condition.equals("yes") && x1Int != x2Int) {
-                getCoordinateInfo();
-                parseCoordinate();
+        boolean conditional = true;
+
+        while (conditional) {
+            if (x1Int != x2Int) { // Not a vertical line
                 printLineInfo();
                 coordinateWithX();
-                System.out.println("Do you want to continue doing this process (yes/no): ");
-                condition = scan.nextLine();
+            } else { // Vertical line
+                checkVertical();
             }
-        } else {
-            checkVertical();
+
+            System.out.print("Do you want to continue doing this process (y/n): ");
+            String condition = scan.nextLine();
+
+            if (condition.equals("n")) {
+                conditional = false;
+            } else {
+                getCoordinateInfo();
+                parseCoordinate();
+            }
         }
     }
 

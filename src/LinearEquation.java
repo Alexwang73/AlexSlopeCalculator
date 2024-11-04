@@ -37,19 +37,51 @@ public class LinearEquation {
 
 
     public String equation() {
-        if (y1 == y2) {
-            return "y = " + yIntercept();
-        }
-        if ((y2-y1) % (x2-x1) == 0) {
-            if (yIntercept() < 0) {
-                return "y = " + (y2 - y1) / (x2 - x1) + "x " + yIntercept();
+        double slope = slope();
+        double yIntercept = yIntercept();
+        String equation = "y = ";
+
+        // Handle horizontal line
+        if (slope == 0) {
+            if (yIntercept == 0) {
+                return "y = 0";
+            } else {
+                return "y = " + roundedToHundredth(yIntercept);
             }
-            return "y = " + (y2 - y1) / (x2 - x1) + "x + " + yIntercept();
         }
-        if (yIntercept() < 0) {
-            return "y = " + (y2 - y1) / (x2 - x1) + "x " + yIntercept();
+
+        int rise = y2 - y1;
+        int run = x2 - x1;
+
+        if (rise % run == 0) {
+            int numberSlope = rise / run;
+
+            if (numberSlope == 1) {
+                equation += "x";
+            } else if (numberSlope == -1) {
+                equation += "-x";
+            } else {
+                equation += numberSlope + "x";
+            }
+        } else {
+            if (rise < 0 && run < 0) {
+                // handle negative
+                rise = Math.abs(rise);
+                run = Math.abs(run);
+            } else if (run < 0) {
+                rise = -rise;
+                run = Math.abs(run);
+            }
+            equation += rise + "/" + run + "x";
         }
-        return "y = " + (y2 - y1) + "/" + (x2 - x1) + "x + " + yIntercept();
+        if (yIntercept != 0) {
+            if (yIntercept > 0) {
+                equation += " + " + roundedToHundredth(yIntercept);
+            } else {
+                equation += " - " + Math.abs(roundedToHundredth(yIntercept));
+            }
+        }
+        return equation;
     }
 
 
@@ -63,7 +95,7 @@ public class LinearEquation {
 
     public String lineInfo() {
 
-        return "The two points are: (" + x1 + ", " + y1 + ") and (" + x2 + ", " + y2 + ") \n" +
+        return "\nThe two points are: (" + x1 + ", " + y1 + ") and (" + x2 + ", " + y2 + ") \n" +
                 "The equation of the line between these two points is: " + equation() + "\n" +
                 "The y-intercept of this line is: " + yIntercept() +"\n" +
                 "The slope of this line is: " + slope() +"\n" +
